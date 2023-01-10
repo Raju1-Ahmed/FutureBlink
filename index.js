@@ -36,7 +36,7 @@ async function run() {
       res.send(service);
     })
 
-    //user collect api for post
+    //post collect api for image upload
     const storage = multer.diskStorage({
       destination: (req, file, cb) =>{
         cb(null, "images");
@@ -55,7 +55,7 @@ async function run() {
      }
     })
 
-     //user collect api for post
+     //post collect api for post
      app.post('/post', async (req, res) => {
       const review = req.body;
       const result = await postsCollection.insertOne(review);
