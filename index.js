@@ -21,10 +21,16 @@ async function run() {
     await client.connect();
     //Data Base File Collection
     const postsCollection = client.db('Post-Collection').collection('post');
+    const commentsCollection = client.db('Post-Collection').collection('comments');
 
     //post collect api for Get
     app.get('/posts', async (req, res) => {
       const post = await postsCollection.find().toArray();
+      res.send(post);
+    });
+
+    app.get('/usersComment', async (req, res) => {
+      const post = await commentsCollection.find().toArray();
       res.send(post);
     });
 
@@ -61,6 +67,15 @@ async function run() {
       const result = await postsCollection.insertOne(review);
       res.send(result);
     })
+
+     //post collect api for post
+     app.post('/comment', async (req, res) => {
+      const review = req.body;
+      const result = await commentsCollection.insertOne(review);
+      res.send(result);
+    })
+
+  
 
   } finally {
   }
